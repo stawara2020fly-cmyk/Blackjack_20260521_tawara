@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2d6a4f;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px black;
+}
+
+#cpu-area, #player-area {
+    background-color: #1b4332;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px auto;
+    max-width: 500px;
+}
+
+#cpu-cards, #player-cards {
+    font-size: 2rem;
+    letter-spacing: 8px;
+    margin: 8px 0;
+}
+
+#controls {
+    margin: 20px auto;
+}
+
+button {
+    font-size: 1rem;
+    padding: 10px 24px;
+    margin: 6px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#hit-btn {
+    background-color: #f4a261;
+    color: white;
+}
+
+#stand-btn {
+    background-color: #e76f51;
+    color: white;
+}
+
+#reset-btn {
+    background-color: #adb5bd;
+    color: white;
+}
+
+#message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 16px;
+    text-shadow: 1px 1px 3px black;
+}
