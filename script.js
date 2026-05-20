@@ -100,11 +100,39 @@ function startGame() {
     messageEl.textContent = "";
 }
 
+function createCardEl(card, faceDown = false) {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    if (faceDown) {
+        div.classList.add("facedown");
+        div.textContent = "🂠";
+    } else {
+        const isRed = card.suit === "♥" || card.suit === "♦";
+        if (isRed) div.classList.add("red");
+        div.innerHTML = `
+            <span class="corner top">${card.rank}<br>${card.suit}</span>
+            <span class="center">${card.suit}</span>
+            <span class="corner bottom">${card.rank}<br>${card.suit}</span>
+        `;
+    }
+    return div;
+}
+
 function renderHands() {
-    playerCardsEl.textContent = playerHand.map(c => c.suit + c.rank).join(" ");
-    cpuCardsEl.textContent    = cpuHand.map(c => c.suit + c.rank).join(" ");
+    playerCardsEl.innerHTML = "";
+    cpuCardsEl.innerHTML = "";
+
+    playerHand.forEach(card => {
+        playerCardsEl.appendChild(createCardEl(card));
+    });
+
+    // CPUの最初の1枚は裏向き
+    cpuHand.forEach((card, i) => {
+        cpuCardsEl.appendChild(createCardEl(card, i === 0));
+    });
+
     playerScoreEl.textContent = calcScore(playerHand);
-    cpuScoreEl.textContent    = "?"; // CPUのスコアはゲーム中は隠す
+    cpuScoreEl.textContent = "?";
 }
 
 hitBtn.addEventListener("click", function() {
@@ -119,6 +147,11 @@ hitBtn.addEventListener("click", function() {
 
 standBtn.addEventListener("click", function() {
     cpuTurn(deck, cpuHand);
+    // スタンド後はCPUの全カードを表向きに
+    cpuCardsEl.innerHTML = "";
+    cpuHand.forEach(card => {
+        cpuCardsEl.appendChild(createCardEl(card));
+    });
     cpuScoreEl.textContent = calcScore(cpuHand);
     messageEl.textContent = judgeWinner(playerHand, cpuHand);
     hitBtn.disabled = true;
